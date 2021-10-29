@@ -1,39 +1,41 @@
 'use strict'
 // Solving quadratic equations
 // a*x**2 + b*x + c = 0
-let a = 5;
-let b = 6;
-let c = -9;
-
-function disc(a, b, c) {
-    return !isNaN(a - b - c) && b ** 2 - 4 * a * c
-}
+let a = 1
+let b = -6
+let c = 9
 
 function quadraticEquation(a, b, c) {
+    if (!isNaN(a - b - c) && a !== 0) {
+        const D = b ** 2 - 4 * a * c
+        if (D > 0) {
+            let xFirst = (-b + Math.sqrt(D)) / (2 * a)
+            let xSecond = (-b - Math.sqrt(D)) / (2 * a)
+            return {D, xFirst, xSecond}
+        }
+        if (D === 0) {
+            let xOne = (-b) / (2 * a)
+            return {D, xOne}
+        }
+        if (D < 0)
+            return {D, NaN}
 
-    const d = disc(a, b, c)
+    } else
+        console.log(`One or more arguments are not a Number, or first argument a = 0`)
 
-    if (d > 0) {
-        let xFirst = (-b + Math.sqrt(d)) / (2 * a)
-        let xSecond = (-b - Math.sqrt(d)) / (2 * a)
-
-        return `Discriminant = ${d} quadratic equation has roots x1=${xFirst}, x2=${xSecond}`
-    }
-    if (d === 0) {
-        let x = (-b) / (2 * a)
-        return `Discriminant = ${d} quadratic equation has one root x=${x}`
-    }
-    return `Discriminant = ${d} < 0 quadratic equation has no roots`
 }
 
-console.log(quadraticEquation(a, b, d))
+const roots = quadraticEquation(a, b, c)
 
-// const roots = solveQuadraticEquation(a, b, c);
-//
-// if (roots) {
-//     console.log(`X1 and X2: ${roots}`);
-// } else {
-//     console.log('There are no roots');
+if (roots.hasOwnProperty('xFirst')) {
+    console.log(`Discriminant = ${roots.D} quadratic equation has roots x1=${roots.xFirst}, x2=${roots.xSecond}`)
+}
+if (roots.hasOwnProperty('xOne')) {
+    console.log(`Discriminant = ${roots.D} quadratic equation has one root x=${roots.xOne}`)
+}
+if (roots.hasOwnProperty('NaN')) {
+    console.log(`Discriminant = ${roots.D} < 0 quadratic equation has no roots`)
+}
 
 /*
 3) Вычислить сумму покупки с учетом скидки.
