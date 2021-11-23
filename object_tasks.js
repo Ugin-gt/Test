@@ -16,6 +16,7 @@ const university = {
 console.log(university)
 
 console.log(Object.assign({}, student, university))
+
 // 2.1 Создать функции-конструкторы:
 // - Книга (автор, название, год издания, издательство)
 // - Электронная версия книги (автор, название, год издания, издательство, формат, электронный номер)
@@ -62,6 +63,7 @@ function MyArray() {
     }
 }
 
+
 MyArray.prototype = new MyArrayProto();
 
 function MyArrayProto() {
@@ -74,48 +76,26 @@ function MyArrayProto() {
         return this.length;
     };
 
-    this.push = function push() {
-        for (let i = 0; i < arguments.length; i++) {
-            this[this.length + i] = arguments[i];
-        }
-        return this.length;
-    }
-
     this.pop = function pop() {
         if (this.length <= 0) {
             return;
         }
-        const lastItem = this[this.length - 1];
-        delete this[--this.length];
-        return lastItem;
+        let lastObj = this[this.length - 1];
+        --this.length;
+        return lastObj;
     };
 
-    this.pop = function pop() {
-        let arrLength = this.length;
-        let deleteObj = this[arrLength - 1];
-        this.length = arrLength - 1;
-        return deleteObj;
-    }
     this.shift = function shift() {
         if (this.length > 0) {
-            const firstItem = this[0];
-            delete this[0];
+            let firstObj = this[0];
             for (let i = 0; i < this.length; i++) {
                 this[i] = this[i + 1];
             }
-            delete this[--this.length];
-            return firstItem;
+            --this.length;
+            return firstObj;
         }
     };
-    this.shift = function shift() {
-        let arrLength = this.length;
-        let deleteObj = this[0];
-        for (let i = 0; i < arrLength; i++) {
-            this[i] = this[i + 1];
-        }
-        this.length -= 1;
-        return deleteObj;
-    }
+
     this.unshift = function unshift(...args) {
         // args.length > 0 ? console.log(this.length += args.length) : typeof Error(`Недопустимый ввод`);
 
@@ -126,16 +106,7 @@ function MyArrayProto() {
             this[i] = args[i];
         }
     };
-    this.unshift = function unshift() {
-        let arglength = arguments.length;
-        let arrLength = this.length;
-        for (let i = arrLength; i >= 0; i--) {
-            this[i + arglength - 1] = this[i - 1]
-        }
-        for (let i = 0; i < arglength; i++) {
-            this[i] = arguments[i]
-        }
-    }
+
     this.reverse = function reverse() {
         const copy = new MyArray();
         for (let i = 0; i < this.length; i++) {
@@ -152,11 +123,11 @@ function MyArrayProto() {
     };
 }
 
-const userArray = new MyArray(1, 2, 3, 4, 5);
+const arr = [1123, 124, 12467, 3, 6, 8545, 8685, 34, 46, 34257, 4];
+const sortArray = [1, 2, 3, 4, 5, 13, 15, 20, 25, 27];
+
+const userArray = new MyArray(arr);
 
 console.log(userArray);
 
-
-const arr = [1123, 124, 12467, 3, 6, 8545, 8685, 34, 46, 34257, 4];
-const sortArray = [1, 2, 3, 4, 5, 13, 15, 20, 25, 27];
 
