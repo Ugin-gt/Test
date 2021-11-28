@@ -1,32 +1,32 @@
 'use strict'
 
 // 1) Функция которая запрашивает число и проверяет простое ли оно (простое число делиться без остатка на себя и на единицу)
-try {
-    const userQuery = +prompt(`Ввведите число: ?`)
+function startAppSimple() {
+    try {
+        const userQuery = +prompt(`Ввведите число: ?`)
 
-    if (isNaN(userQuery)) {
-        throw new Error('Данные некорректны')
-    }
-
-    function simpleNumber(userQuery) {
-        let check = true
-        for (let i = 2; i < userQuery; i++) {
-            if (userQuery % i === 0) {
-                check = false
-                break
-            }
+        if (isNaN(userQuery)) {
+            throw new Error
         }
-        return check
+        simpleNumber(userQuery) === true ? alert(`Да, ${userQuery} число простое!`) : alert(`${userQuery} - это непростое число!`);
+
+        function simpleNumber(userQuery) {
+            let check = true
+            for (let i = 2; i < userQuery; i++) {
+                if (userQuery % i === 0) {
+                    check = false
+                    break
+                }
+            }
+            return check
+        }
+
+    } catch (err) {
+        alert(`Ошибка, Вы ввели не число!`)
     }
-
-    const result = simpleNumber(userQuery)
-
-    result === true ? alert(`Да, ${userQuery} число простое!`) : alert(`Это ${userQuery} непростое число!`);
-
-} catch (err) {
-    alert(`Ошибка, вы ввели не число!`)
 }
 
+startAppSimple()
 
 // 2) Создать функцию checkMultiplicity, которая принимает два числа и проверяет кратность первого вторым:
 function checkMultiplicity(a, b) {
